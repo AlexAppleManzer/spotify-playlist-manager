@@ -1,10 +1,68 @@
 <p>home works!</p>
+<div class="main">
+ 
+<br><br>
+  <div class="banner">
+    <h2>Welcome!</h2>
+    <p>This is a spotiyfy playlist managing application. Please sign in to begin.</p>
+  </div>
+        
+>
 
-<div class="card" style="width: 18rem;">
+
+<br><br>
+<p><strong>Suggested Community playlists and songs:</strong></p>
+
+<div class="container playlists">
+
+  <div class="card-deck-wrapper">
+      <div class="card-deck">
+          <div class="card p-2">
+              <!--<a class="card-block stretched-link text-decoration-none" href="../playlist/playlist.component.html">
+                <h4 class="card-title">Playlist 1</h4>
+                <p class="card-text">Insert album cover of first song above playlist title. Possibly add first three song title below.</p>
+              </a>-->
+              <a class="nav-link text-dark" [routerLink]='["/playlists"]'>
+                <h4 class="card-title">Playlist 1</h4>
+                <p class="card-text">Insert album cover of first song above playlist title. Possibly add first three song title below.</p>
+              </a>
+          </div>
+          <div class="card p-2">
+              <a class="nav-link text-dark" [routerLink]='["/playlists"]'>
+                  <h4 class="card-title">Playlist 2</h4>
+                  <p class="card-text">Insert album cover of first song above playlist title. Possibly add first three song title below.</p>
+              </a>
+          </div>
+          <div class="card p-2">
+              <a class="nav-link text-dark" [routerLink]='["/playlists"]'>
+                  <h4 class="card-title">Playlist 3</h4>
+                  <p class="card-text">Insert album cover of first song above playlist title. Possibly add first three song title below.</p>
+              </a>
+          </div>
+          <!--<ul>
+            <li class="nav-item" [routerLinkActive]='["link-active"]'>
+              <a class="nav-link text-dark" [routerLink]='["/playlist"]'>Fetch data</a>
+            </li>
+          </ul>-->
+      </div>
+  </div>
+</div>
+<br>
+<button class="button">Song 1</button>
+<br>
+<button class="button">Song 2</button>
+<br>
+<button class="button">Song 3</button>
+<br>
+<button class="button">Song 4</button>
+<br>
+<button class="button">Song 5</button>
+</div>
+<!-- <div class="card" style="width: 18rem;">
   <img class="card-img-top" src="https://images.pexels.com/photos/416179/pexels-photo-416179.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" alt="Card image cap">
   <div class="card-body">
     <h5 class="card-title">Card title</h5>
     <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
     <a href="#" class="btn btn-primary">Go somewhere</a>
   </div>
-</div>
+</div> -->
