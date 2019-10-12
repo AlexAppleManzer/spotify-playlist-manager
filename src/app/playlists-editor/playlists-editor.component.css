@@ -81,3 +81,17 @@ height: 50%;
 text-align: center;
 background-color: burlywood;
 }
+
+#element1 {
+  text-align: center;
+  margin-left: 12.5%; 
+  margin-right: 25%;
+  float: left;
+  width: 25%;
+}
+
+#element2 {
+  text-align: center;
+  float: left;
+  width: 25%;
+}

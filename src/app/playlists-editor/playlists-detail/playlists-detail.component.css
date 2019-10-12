@@ -37,7 +37,7 @@ background-color: #f1f1f1;
 
 .column {
 float: left;
-width: 50%;
+width: 100%;
 padding: 10px;
 height: 100%; /* Should be removed. Only for demonstration */
 }
