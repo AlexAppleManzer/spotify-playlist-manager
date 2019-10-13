@@ -70,7 +70,8 @@ color: #fff;
 }
 
 .main {
-background-image: url('../images/img2.jpg');
+width: 90%;
+margin-left: 10%;
 }
 
 .banner {
@@ -84,6 +85,7 @@ background-color: burlywood;
 
 #element1 {
   text-align: center;
+  margin-top: 1%;
   margin-left: 12.5%; 
   margin-right: 25%;
   float: left;
@@ -93,5 +95,10 @@ background-color: burlywood;
 #element2 {
   text-align: center;
   float: left;
+  margin-top: 1%;
   width: 25%;
+}
+
+.whitetext {
+  color: white;
 }
