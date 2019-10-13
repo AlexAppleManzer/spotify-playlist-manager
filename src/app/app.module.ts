@@ -9,6 +9,10 @@ import { HomeComponent } from './home/home.component';
 import { PlaylistsEditorComponent } from './playlists-editor/playlists-editor.component';
 import { PlaylistsDetailComponent } from './playlists-editor/playlists-detail/playlists-detail.component';
 import { PlaylistsNavigatorComponent } from './playlists-editor/playlists-navigator/playlists-navigator.component';
+import { LoginComponent } from './navbar/login/login.component';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { OAuthModule } from 'angular-oauth2-oidc';
+import { SpotifyInterceptor } from './helpers/spotify.interceptor';
 
 @NgModule({
   declarations: [
@@ -18,13 +22,18 @@ import { PlaylistsNavigatorComponent } from './playlists-editor/playlists-naviga
     HomeComponent,
     PlaylistsEditorComponent,
     PlaylistsDetailComponent,
-    PlaylistsNavigatorComponent
+    PlaylistsNavigatorComponent,
+    LoginComponent,
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule,
+    OAuthModule.forRoot(),
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: SpotifyInterceptor, multi: true },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

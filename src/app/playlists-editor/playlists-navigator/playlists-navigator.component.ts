@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { SpotifyService } from 'src/app/services/spotify.service';
 
 @Component({
   selector: 'app-playlists-navigator',
@@ -6,10 +7,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./playlists-navigator.component.css']
 })
 export class PlaylistsNavigatorComponent implements OnInit {
-
-  constructor() { }
+  playlists: any;
+  constructor(private spotifyService: SpotifyService) { }
 
   ngOnInit() {
+    this.spotifyService.listCurrentUserPlaylists().subscribe(
+      result => this.playlists.items = result,
+      err => console.error(err),
+    )
   }
 
 }

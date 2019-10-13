@@ -6,7 +6,7 @@ import { PlaylistsEditorComponent } from './playlists-editor/playlists-editor.co
 
 const routes: Routes = [
   {path: "playlists", component: PlaylistsEditorComponent},
-  {path: "**", component: HomeComponent}
+  {path: "**", component: HomeComponent},
 ];
 
 @NgModule({
