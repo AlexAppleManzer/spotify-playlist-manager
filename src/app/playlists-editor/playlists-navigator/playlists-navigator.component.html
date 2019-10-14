@@ -1,6 +1,3 @@
-<div class="sidenav">
-  <a *ngFor="" >{{}}</a>
-  <a href="#">Services</a>
-  <a href="#">Clients</a>
-  <a href="#">Contact</a>
+<div *ngIf="playlists" class="sidenav">
+  <a (click)="playlistClicked(item.id, item.name)" *ngFor="let item of playlists.items">{{item.name}}</a>
 </div>
