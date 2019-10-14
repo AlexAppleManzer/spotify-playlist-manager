@@ -12,8 +12,10 @@ export class PlaylistsNavigatorComponent implements OnInit {
 
   ngOnInit() {
     this.spotifyService.listCurrentUserPlaylists().subscribe(
-      result => this.playlists.items = result,
+      // result => this.playlists.items = result,
+      result => this.playlists = result,
       err => console.error(err),
+      () => console.log(this.playlists),
     )
   }
 
