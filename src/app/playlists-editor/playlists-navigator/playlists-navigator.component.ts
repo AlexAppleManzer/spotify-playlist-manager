@@ -20,7 +20,7 @@ export class PlaylistsNavigatorComponent implements OnInit {
   }
 
   playlistClicked(id, name) {
-    console.log("clicked " + id + name)
+    //console.log("clicked " + id + name)
     this.clickedPlaylist.emit({id, name})
   }
 

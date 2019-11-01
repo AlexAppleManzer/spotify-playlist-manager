@@ -13,6 +13,7 @@ import { LoginComponent } from './navbar/login/login.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { OAuthModule } from 'angular-oauth2-oidc';
 import { SpotifyInterceptor } from './helpers/spotify.interceptor';
+import { NgDragDropModule } from 'ng-drag-drop';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { SpotifyInterceptor } from './helpers/spotify.interceptor';
     AppRoutingModule,
     HttpClientModule,
     OAuthModule.forRoot(),
+    NgDragDropModule.forRoot(),
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: SpotifyInterceptor, multi: true },
