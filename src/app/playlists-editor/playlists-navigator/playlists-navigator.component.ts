@@ -8,6 +8,7 @@ import { SpotifyService } from 'src/app/services/spotify.service';
 })
 export class PlaylistsNavigatorComponent implements OnInit {
   playlists: any;
+  currentUser: any;
   constructor(private spotifyService: SpotifyService) { }
   @Output() clickedPlaylist = new EventEmitter<any>();
 
@@ -15,13 +16,27 @@ export class PlaylistsNavigatorComponent implements OnInit {
     this.spotifyService.listCurrentUserPlaylists().subscribe(
       result => this.playlists = result,
       err => console.error(err),
-      () => console.log(this.playlists),
+      //() => console.log(this.playlists),
     )
+
+    this.spotifyService.getCurrentUserProfile().subscribe(
+      res => {
+        this.currentUser = res;
+      },
+      err => console.log(err),
+      () => {}
+    );
   }
 
-  playlistClicked(id, name) {
+  playlistClicked(item) {
     //console.log("clicked " + id + name)
-    this.clickedPlaylist.emit({id, name})
+    if(item.id == "myLibrary") {
+      this.clickedPlaylist.emit({id: item.id, name: item.name, editable: true});
+      return;
+    }
+    let editable = this.currentUser.id === item.owner.id
+    //console.log(editable)
+    this.clickedPlaylist.emit({id: item.id, name: item.name, editable})
   }
 
 }

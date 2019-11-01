@@ -4,21 +4,6 @@
   background-color: black;
 }
 
-/* Style buttons */
-.btn {
-  background-color: rgb(252, 0, 0); /* Blue background */
-  border: none; /* Remove borders */
-  color: white; /* White text */
-  padding: 10px 10px; /* Some padding */
-  font-size: 16px; /* Set a font size */
-  cursor: pointer; /* Mouse pointer on hover */
-}
-
-/* Darker background on mouse-over */
-.btn:hover {
-  background-color: rgb(185, 7, 7);
-}
-
 .command-bar {
   display:flex;
   justify-content: space-between;
@@ -32,8 +17,16 @@ h4 {
 
 .list-group-item {
   background-color: rgb(230, 177, 33);
+
+  display:flex;
+  justify-content: space-between;
+  flex-direction: row;
 }
 
 .list-group-item:hover {
   background-color: rgb(255, 196, 45);
+}
+
+.playlist-detail {
+  width: 500;
 }

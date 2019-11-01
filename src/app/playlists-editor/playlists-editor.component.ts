@@ -18,7 +18,8 @@ export class PlaylistsEditorComponent implements OnInit {
       // playlist already on screen
       // possible should delete/reorder
       console.log("playlist already on screen")
-    } else if (( window.screen.width - 300 ) / 400 < this.activePlaylists.length) {
+    } else if (( window.innerWidth - 300 ) / 500 < this.activePlaylists.length) {
+    
       // show toast prompt saying can't add more
       // maybe replace oldest one?
       console.log("max playlists reached")

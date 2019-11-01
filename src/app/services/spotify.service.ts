@@ -17,4 +17,12 @@ export class SpotifyService {
   public getSongsInPlaylist(id:string) {
     return this.httpClient.get(this.baseUrl + `/playlists/${id}/tracks`)
   }
+
+  public getCurrentUserLibrary() {
+    return this.httpClient.get(`${this.baseUrl}/me/tracks`)
+  }
+
+  public getCurrentUserProfile() {
+    return this.httpClient.get(`${this.baseUrl}/me`);
+  }
 }
