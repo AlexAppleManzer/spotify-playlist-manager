@@ -1,6 +1,6 @@
 <div class="page">
   <app-playlists-navigator (clickedPlaylist)="loadPlaylist($event)"></app-playlists-navigator>
   <div class="playlists-container">
-      <app-playlists-detail *ngFor="let item of activePlaylists" class="playlists" (close)="closePlaylist($event)" [playlistId]="item.id" [name]="item.name"></app-playlists-detail>
+      <app-playlists-detail *ngFor="let item of activePlaylists" class="playlists" (close)="closePlaylist($event)" [playlistId]="item.id" [name]="item.name" [editable]=item.editable></app-playlists-detail>
   </div>
 </div>
