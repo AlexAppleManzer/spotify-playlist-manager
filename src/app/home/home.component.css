@@ -43,7 +43,9 @@
 }
 
 .main {
-  background-image: url('../images/img2.jpg');
+  background-image: url('../images/img3.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
   width: 90%;
   margin-left: 5%;
 }

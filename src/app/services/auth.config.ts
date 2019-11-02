@@ -13,7 +13,8 @@ export const authConfig: AuthConfig = {
   
   // set the scope for the permissions the client should request
   // The first three are defined by OIDC. The 4th is a usecase-specific one
-  scope: 'user-read-private user-read-email',
+  scope: 'user-read-private user-read-email playlist-modify-private playlist-modify-public playlist-read-private user-library-read user-library-modify',
+  // scope: 'user-read-private user-read-email',
   
 
   oidc: false,
