@@ -27,6 +27,17 @@ h4 {
   background-color: rgb(255, 196, 45);
 }
 
+.list-group{
+  overflow: scroll;
+  overflow-x: hidden;
+  height:90vh;
+}
+
 .playlist-detail {
   width: 500;
+}
+
+.button-list{
+  display:flex;
+  flex-direction: row;
 }
