@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ɵCompiler_compileModuleSync__POST_R3__ } from '@angular/core';
 import { SpotifyService } from 'src/app/services/spotify.service';
 import { DropEvent } from 'ng-drag-drop';
 
@@ -15,6 +15,9 @@ export class PlaylistsDetailComponent implements OnInit {
   playlistDataItems: any[];
   isUserLibrary: boolean = false;
   @Input() editable: boolean = true;
+  playlistIncomplete = false;
+
+  
   constructor(private spotifyService: SpotifyService) { }
 
   ngOnInit() {
@@ -24,9 +27,10 @@ export class PlaylistsDetailComponent implements OnInit {
         result => {
           this.playlistData = result;
           this.playlistDataItems = this.playlistData.items;
+          this.playlistIncomplete = this.playlistData.total > this.playlistDataItems.length
         },
         err => console.error(err),
-        //() => console.log(this.myLibrary),
+        //() => console.log(this.playlistData),
       );
 
       this.isUserLibrary = true;
@@ -35,12 +39,38 @@ export class PlaylistsDetailComponent implements OnInit {
         res => {
           this.playlistData = res;
           this.playlistDataItems = this.playlistData.items;
+          this.playlistIncomplete = this.playlistData.total > this.playlistDataItems.length
+        },
+        err => console.error(err),
+        //() => console.log(this.playlistData)
+      )
+    }
+  }
+
+  loadMoreSongs() {
+    if (this.playlistId === 'myLibrary') {
+      //load user library instead of a playlsit
+      this.spotifyService.getCurrentUserLibrary(this.playlistDataItems.length).subscribe(
+        result => {
+          this.playlistData = result;
+          this.playlistDataItems = this.playlistDataItems.concat(this.playlistData.items);
+          this.playlistIncomplete = this.playlistData.total > this.playlistDataItems.length;
+        },
+        err => console.error(err),
+        //() => console.log(this.myLibrary),
+      );
+
+      this.isUserLibrary = true;
+    } else {
+      this.spotifyService.getSongsInPlaylist(this.playlistId, this.playlistDataItems.length).subscribe(
+        res => {
+          this.playlistData = res;
+          this.playlistDataItems = this.playlistDataItems.concat(this.playlistData.items);
+          this.playlistIncomplete = this.playlistData.total > this.playlistDataItems.length;
         },
         err => console.error(err),
         //() => console.log(this.playlistDataItems)
       )
-      
-
     }
   }
 
@@ -49,7 +79,25 @@ export class PlaylistsDetailComponent implements OnInit {
   }
 
   deleteSong(i: number){
-    this.playlistDataItems.splice(i, 1);
+    let self = this;
+    let callback = function() {
+      self.playlistDataItems = self.playlistDataItems.filter((item) => item.track.id !== self.playlistDataItems[i].track.id)
+    }
+
+    if (this.isUserLibrary) {
+      this.spotifyService.removeSongFromCurrentUserLibrary(this.playlistDataItems[i].track.id).subscribe(
+        res => {},
+        err => console.error(err),
+        () => callback(),
+      )
+      return;
+    }
+    this.spotifyService.removeTrackFromPlaylist(this.playlistDataItems[i].track.uri, this.playlistId).subscribe(
+      res => {},
+      err => console.error(err),
+      () => callback(),
+    )
+    
   }
   
   onItemDrop(event: DropEvent) {
@@ -61,13 +109,29 @@ export class PlaylistsDetailComponent implements OnInit {
       return;
     }
 
-    let droppedSongName = event.nativeEvent.srcElement.innerText;
-    
+    let droppedSongName = event.nativeEvent.srcElement.innerText || "not found";
+    console.log(droppedSongName)
+    let self = this;
+    let callbackFunction = function () {self.playlistDataItems.splice(droppedLocation, 0, draggedSong)};
     let droppedLocation = 0;
-    if (!this.isUserLibrary){
+    if (this.isUserLibrary) {
+      this.spotifyService.addSongToCurrentUserLibrary(draggedSong.track.id).subscribe(
+        res => {},
+        err => console.error(err),
+        () => callbackFunction(),
+      )
+    } else {
       droppedLocation = this.playlistDataItems.findIndex((song) => song.track.name === droppedSongName);
-    }
-    this.playlistDataItems.splice(droppedLocation, 0, draggedSong);
-  }
+      if (droppedLocation === -1) {
+        droppedLocation = this.playlistDataItems.length
+      }
+      
 
+      this.spotifyService.insertTrackIntoPlaylist(draggedSong.track.uri, droppedLocation, this.playlistId).subscribe(
+        res => {},
+        err => console.error(err),
+        () => callbackFunction(),
+      )
+    }
+  }
 }

@@ -1,7 +1,10 @@
-<div class="card playlist-detail" *ngIf="playlistData">
+<div class="card playlist-detail" *ngIf="playlistData" >
   <div class="command-bar">
       <h4>Songs for {{name}}</h4>
-      <button class="btn btn-danger" (click)="closeThis()"><i class="fa fa-close"></i></button>
+      <div class="button-list">
+        <button class="btn btn-primary" (click)="ngOnInit()"><i class="fa fa-refresh"></i></button>
+        <button class="btn btn-danger" (click)="closeThis()"><i class="fa fa-close"></i></button>
+      </div>
   </div>
   
   <ul class="list-group" droppable [dropEnabled]='editable' (onDrop)="onItemDrop($event)">
@@ -9,6 +12,7 @@
       {{item.track.name}}
       <button class="btn btn-light" (click)="deleteSong(i)" *ngIf='editable'><i class="fa fa-close"></i></button>
     </li>
-    
+    <li *ngIf="playlistIncomplete" class="list-group-item"><button class="btn btn-primary" (click)="loadMoreSongs()">Load More Songs</button></li>
+    <li *ngIf="playlistDataItems.length === 0" class="list-group-item">Oh no! You have no songs in this playlist!</li>
   </ul>
 </div>
