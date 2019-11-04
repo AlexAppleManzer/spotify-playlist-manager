@@ -43,19 +43,22 @@
 }
 
 .main {
-  background-image: url('../images/img2.jpg');
+  background-image: url('../images/img3.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
   width: 90%;
   margin-left: 5%;
 }
 
 .banner {
   float: none;
+  opacity: 80%;
   width: 70%;
   padding: 10px;
   height: 50%;
   margin-left: 15%;
   text-align: center;
-  background-color: burlywood;
+  background-color: rgba(222, 184, 135, 0.800);
 }
 
 .whitetext {

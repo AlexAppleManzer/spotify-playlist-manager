@@ -35,3 +35,11 @@ body {
   .sidenav {padding-top: 15px;}
   .sidenav a {font-size: 18px;}
 }
+
+.sidenav a.mylib {
+  color: rgb(4, 24, 207)
+}
+
+.sidenav a.mylib:hover {
+  color: rgb(59, 78, 247)
+}

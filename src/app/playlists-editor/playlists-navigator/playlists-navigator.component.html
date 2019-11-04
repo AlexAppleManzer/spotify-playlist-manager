@@ -1,4 +1,4 @@
 <div *ngIf="playlists" class="sidenav">
-  <a (click)="playlistClicked({id: 'myLibrary', name: 'My Library'})">My Library</a>
+  <a class="mylib" (click)="playlistClicked({id: 'myLibrary', name: 'My Library'})">My Library</a>
   <a (click)="playlistClicked(item)" *ngFor="let item of playlists.items">{{item.name}}</a>
 </div>
