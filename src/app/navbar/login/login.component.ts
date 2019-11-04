@@ -18,7 +18,6 @@ export class LoginComponent implements OnInit {
 
   private configure() {
     this.oauthService.configure(authConfig);
-    // this.oauthService.scope = 'user-read-private user-read-email';
     this.oauthService.oidc = false;
     this.oauthService.tokenValidationHandler = new JwksValidationHandler();
     this.oauthService.tryLogin();
