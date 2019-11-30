@@ -11,6 +11,7 @@ export class PlaylistsNavigatorComponent implements OnInit {
   currentUser: any;
   constructor(private spotifyService: SpotifyService) { }
   @Output() clickedPlaylist = new EventEmitter<any>();
+  @Output() openSearch = new EventEmitter<any>();
 
   ngOnInit() {
     this.spotifyService.listCurrentUserPlaylists().subscribe(
@@ -37,6 +38,10 @@ export class PlaylistsNavigatorComponent implements OnInit {
     let editable = this.currentUser.id === item.owner.id
     //console.log(editable)
     this.clickedPlaylist.emit({id: item.id, name: item.name, editable})
+  }
+
+  searchClicked(){
+    this.openSearch.emit();
   }
 
 }

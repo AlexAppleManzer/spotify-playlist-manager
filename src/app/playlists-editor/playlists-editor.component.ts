@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { OAuthService } from 'angular-oauth2-oidc';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-playlists-editor',
@@ -7,9 +9,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PlaylistsEditorComponent implements OnInit {
   activePlaylists: any[] = [];
-  constructor() { }
+  constructor(private oauthService: OAuthService, private route: Router) { }
+  searchShow = false;
+  loggedIn = true;
 
   ngOnInit() {
+    this.loggedIn = !!this.oauthService.getAccessToken();
+    if(!this.loggedIn) {
+      this.route.navigateByUrl('/home')
+    }
   }
 
   loadPlaylist(item){
@@ -30,6 +38,14 @@ export class PlaylistsEditorComponent implements OnInit {
 
   closePlaylist(id){
     this.activePlaylists = this.activePlaylists.filter((value) => value.id != id)
+  }
+
+  closeSearch() {
+    this.searchShow = false;
+  }
+
+  openSearch() {
+    this.searchShow = true;
   }
 
 }

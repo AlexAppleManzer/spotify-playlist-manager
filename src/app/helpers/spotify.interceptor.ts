@@ -1,11 +1,13 @@
 import { Injectable } from '@angular/core';
-import { HttpRequest, HttpHandler, HttpEvent, HttpInterceptor } from '@angular/common/http';
+import { HttpRequest, HttpHandler, HttpEvent, HttpInterceptor, HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { OAuthService } from 'angular-oauth2-oidc';
+import { Router } from '@angular/router';
+import {tap} from 'rxjs/operators';
 
 @Injectable()
 export class SpotifyInterceptor implements HttpInterceptor {
-  constructor(private oauthService: OAuthService) {}
+  constructor(private oauthService: OAuthService, private route: Router) {}
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     // add authorization header with jwt token if available
@@ -18,6 +20,14 @@ export class SpotifyInterceptor implements HttpInterceptor {
       });
     }
 
-    return next.handle(request);
+    return next.handle(request).pipe( tap(() => {},
+    (err: any) => {
+      if (err instanceof HttpErrorResponse) {
+        if (err.status !== 401) {
+          return;
+        }
+        this.oauthService.logOut();
+      }
+    }));
   }
 }

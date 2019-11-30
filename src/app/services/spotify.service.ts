@@ -43,4 +43,12 @@ export class SpotifyService {
   public removeSongFromCurrentUserLibrary(trackId: string) {
     return this.httpClient.delete(`${this.baseUrl}/me/tracks`, {params: new HttpParams().append("ids", trackId)});
   }
+
+  public searchSongsByKeyword(search: string, offset: Number = 0) {
+    return this.httpClient.request('get', `${this.baseUrl}/search`, {params: new HttpParams().append("q", search).append("type", "track").append("offset", offset.toString())})
+  }
+  
+  public createPlaylist(name: string, publicPlaylist: boolean = true, description: string = "") {
+    return this.httpClient.post(`${this.baseUrl}/me/playlists`, {name, public: publicPlaylist, description});
+  }
 }

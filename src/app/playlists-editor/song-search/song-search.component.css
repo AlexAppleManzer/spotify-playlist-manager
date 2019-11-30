@@ -26,10 +26,31 @@ h4 {
 .list-group-item:hover {
   background-color: rgb(63, 207, 111);
 }
+
+.form-control {
+  align-self: center;
+  height:100%;
+}
+
+h4 {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
 .list-group{
   overflow: scroll;
   overflow-x: hidden;
   height:90vh;
+}
+
+.playlist-detail {
+  width: 500;
+}
+
+.button-list{
+  padding-left: 10px;
+  display:flex;
+  flex-direction: row;
 }
 
 .songtext{
@@ -40,13 +61,4 @@ h4 {
 
 .italic{
   font-style: italic;
-}
-
-.playlist-detail {
-  width: 500;
-}
-
-.button-list{
-  display:flex;
-  flex-direction: row;
 }
