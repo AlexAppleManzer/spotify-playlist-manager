@@ -102,20 +102,35 @@ export class PlaylistsDetailComponent implements OnInit {
   
   onItemDrop(event: DropEvent) {
     let draggedSong = event.dragData;
-    let draggedSongName = event.dragData.track.name;
+    let draggedSongName = "";
+    let draggedSongId = "";
+    let draggedSongUri = "";
+    let draggedSongArtists = "";
+
+    if (draggedSong.track) {
+      draggedSongName = event.dragData.track.name;
+      draggedSongId = event.dragData.track.id;
+      draggedSongUri = event.dragData.track.uri;
+      draggedSongArtists = event.dragData.track.artists;
+    } else {
+      draggedSongName = event.dragData.name;
+      draggedSongId = event.dragData.id;
+      draggedSongUri = event.dragData.uri;
+      draggedSongArtists = event.dragData.artists;
+    }
+    
 
     if(this.playlistDataItems.find((song) => song.track.name === draggedSongName)){
       console.log('song already exists in playlist');
       return;
     }
 
-    let droppedSongName = event.nativeEvent.srcElement.innerText || "not found";
-    console.log(droppedSongName)
+    let droppedSongName = event.nativeEvent.srcElement.id || "not found";
     let self = this;
-    let callbackFunction = function () {self.playlistDataItems.splice(droppedLocation, 0, draggedSong)};
+    let callbackFunction = function () {self.playlistDataItems.splice(droppedLocation, 0, {track: {name: draggedSongName, artists: draggedSongArtists, id: draggedSongId, uri: draggedSongUri}})};
     let droppedLocation = 0;
     if (this.isUserLibrary) {
-      this.spotifyService.addSongToCurrentUserLibrary(draggedSong.track.id).subscribe(
+      this.spotifyService.addSongToCurrentUserLibrary(draggedSongId).subscribe(
         res => {},
         err => console.error(err),
         () => callbackFunction(),
@@ -127,7 +142,7 @@ export class PlaylistsDetailComponent implements OnInit {
       }
       
 
-      this.spotifyService.insertTrackIntoPlaylist(draggedSong.track.uri, droppedLocation, this.playlistId).subscribe(
+      this.spotifyService.insertTrackIntoPlaylist(draggedSongUri, droppedLocation, this.playlistId).subscribe(
         res => {},
         err => console.error(err),
         () => callbackFunction(),

@@ -8,8 +8,8 @@
   </div>
   
   <ul class="list-group" droppable [dropEnabled]='editable' (onDrop)="onItemDrop($event)">
-    <li id="test" draggable [dragData]="item" class="list-group-item" *ngFor="let item of playlistDataItems; let i = index">
-      {{item.track.name}}
+    <li [id]="item.track.name" draggable [dragData]="item" class="list-group-item" *ngFor="let item of playlistDataItems; let i = index">
+      <span class="songtext">{{item.track.name}} <span class="songtext italic">{{item.track.artists[0].name}}</span></span>
       <button class="btn btn-light" (click)="deleteSong(i)" *ngIf='editable'><i class="fa fa-close"></i></button>
     </li>
     <li *ngIf="playlistIncomplete" class="list-group-item"><button class="btn btn-primary" (click)="loadMoreSongs()">Load More Songs</button></li>

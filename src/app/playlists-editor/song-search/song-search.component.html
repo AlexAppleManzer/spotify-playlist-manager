@@ -1,0 +1,21 @@
+<div class="card playlist-detail" >
+    <div class="command-bar">
+        <h4>Song Search</h4>
+        <input #searchbox type="text" class= "form-control" (keyup.enter)="search(searchbox.value)" placeholder="Search">
+        <div class="button-list">    
+          <button class="btn btn-primary" (click)="search(searchbox.value)"><i class="fa fa-search"></i></button>
+          <button class="btn btn-primary" (click)="ngOnInit()"><i class="fa fa-refresh"></i></button>
+          <button class="btn btn-danger" (click)="closeThis()"><i class="fa fa-close"></i></button>
+        </div>
+    </div>
+    
+    <ul class="list-group" *ngIf="playlistDataItems" droppable [dropEnabled]='editable' (onDrop)="onItemDrop($event)">
+      <li id="test" draggable [dragData]="item" class="list-group-item" *ngFor="let item of playlistDataItems; let i = index">
+          <span class="songtext">{{item.name}} <span class="songtext italic">{{item.artists[0].name}}</span></span>
+        <button class="btn btn-light" (click)="deleteSong(i)" *ngIf='editable'><i class="fa fa-close"></i></button>
+      </li>
+      <li *ngIf="playlistIncomplete" class="list-group-item"><button class="btn btn-primary" (click)="loadMoreSongs()">Load More Songs</button></li>
+      <li *ngIf="playlistDataItems.length === 0" class="list-group-item">No songs showed up in this search</li>
+    </ul>
+  </div>
+  
