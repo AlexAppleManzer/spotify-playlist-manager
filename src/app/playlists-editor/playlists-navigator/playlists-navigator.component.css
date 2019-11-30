@@ -37,9 +37,11 @@ body {
 }
 
 .sidenav a.mylib {
-  color: rgb(4, 24, 207)
+  color: #28a745;
+  font-size: 30px;
+  font-weight: bold;
 }
 
 .sidenav a.mylib:hover {
-  color: rgb(59, 78, 247)
+  color: rgb(0, 199, 17);
 }
