@@ -9,9 +9,12 @@ import { SpotifyService } from 'src/app/services/spotify.service';
 export class PlaylistsNavigatorComponent implements OnInit {
   playlists: any;
   currentUser: any;
+  newPlaylist: any;
+  playlistName: string;
   constructor(private spotifyService: SpotifyService) { }
   @Output() clickedPlaylist = new EventEmitter<any>();
   @Output() openSearch = new EventEmitter<any>();
+  
 
   ngOnInit() {
     this.spotifyService.listCurrentUserPlaylists().subscribe(
@@ -44,4 +47,21 @@ export class PlaylistsNavigatorComponent implements OnInit {
     this.openSearch.emit();
   }
 
+
+  getPlaylistName(){
+    console.log("te string: " + this.playlistName);
+    this.createNewPlaylist(this.playlistName);
+  }
+
+  createNewPlaylist(name: string){
+    this.spotifyService.createPlaylist(name).subscribe(
+      (result) => {
+        this.newPlaylist = result;
+      },
+      (err) => {
+        console.error(err);
+      },
+      () => {}
+    )
+  }
 }
