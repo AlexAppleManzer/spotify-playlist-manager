@@ -25,6 +25,16 @@ body {
   color: #f1f1f1;
 }
 
+.sidenav .btn-link {
+  color: #28a745;
+  font-size: 30px;
+  font-weight: bold;
+}
+
+.sidenav .btn-link:hover {
+  color: rgb(0, 199, 17);
+}
+
 .main {
   margin-left: 160px; /* Same as the width of the sidenav */
   font-size: 28px; /* Increased text to enable scrolling */
